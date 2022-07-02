@@ -1,4 +1,4 @@
-package booking_hotel
+package main
 
 import (
 	"booking-hotel/app"
@@ -18,10 +18,14 @@ func main() {
 	discountService := service.NesDiscountService(discountRepostiory, db, validate)
 	discountController := controller.NewDiscountController(discountService)
 
-	router := app.NewRouter(discountController)
+	invoiceRepository := repository.NewInvoiceRepository()
+	invoiceService := service.NewInvoiceService(invoiceRepository, db, validate)
+	invoiceController := controller.NewInvoiceController(invoiceService)
+
+	router := app.NewRouter(discountController, invoiceController)
 
 	server := http.Server{
-		Addr:    "localhost:3001",
+		Addr:    "localhost:3080",
 		Handler: middleware.NewAuthMiddleware(router),
 	}
 

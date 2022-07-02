@@ -16,9 +16,9 @@ type DiscountServiceImpl struct {
 	Validate           *validator.Validate
 }
 
-func NesDiscountService(DiscountRepository repository.DiscountRepository, DB *sql.DB, validate *validator.Validate) DiscountService {
+func NesDiscountService(discountRepository repository.DiscountRepository, DB *sql.DB, validate *validator.Validate) DiscountService {
 	return &DiscountServiceImpl{
-		DiscountRepository: DiscountRepository,
+		DiscountRepository: discountRepository,
 		DB:                 DB,
 		Validate:           validate,
 	}
